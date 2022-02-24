@@ -17,136 +17,167 @@ const headers = {
     'Cache-Control': 'no-cache'
 };
 
-var text = [
-    "What movies did James Dean appear in?",
-    "East of Eden",
-    "What companies has AARP endorsed?",
-    "AARP Services",
-    "Colonial Penn Insurance",
-    "PCS",
-    "Famous people who have been Rhodes scholars.",
-    "Maine Congressman Tom Allen",
-    "Australian Labor leader Kim Beazley",
-    "Alan Bersin",
-    "Newark Councilman, Cory Booker",
-    "What countries have Rhodes Scholars come from?",
-    "Australia",
-    "Canada",
-    "Pakistan",
-    "US",
-    "In what countries are agouti's found?",
-    "Brazil",
-    "Cayman Islands",
-    "Costa Rica",
-    "Who have been members of the organization? (Black Panthers)",
-    "Mumia Abu-Jamal",
-    "Jamil Abdullah Al-Amin",
-    "Bill Brent",
-    "Elaine Brown",
-    "Rap Brown",
-    "Tony Bryant",
-    "Stokeley Carmichael",
-    "Mark Clark",
-    "Who are the members of Insane Clown Poose?",
-    "Douglas Dail",
-    "Q:What albums has Insane Clown Poose made?",
-    "The Amazing Jeckle Brothers",
-    "Bizzar Bazaar",
-    "What diseases are prions associated with?",
-    "Bovine Spongiform Encephalopathy (BSE) or mad cow disease ",
-    "Creutzfedlt-Jakob Disease (CJD) in humans",
-    "What researchers have worked with prions?",
-    "Adriano Aguzzi",
-    "Dr. Paul Brown",
-    "Dr. Byron Caughey"]
+let clients = {
+    '2e22b683-340d-4d91-917f-c6759b08ef17': {'uuid': '2e22b683-340d-4d91-917f-c6759b08ef17',
+                                             'external_id': 1,
+                                             'name': 'Vasiliy',
+                                             'type': 'driver'},
+    'a1053f60-9ed0-4f43-87e8-09693d2e20dc': {'uuid': 'a1053f60-9ed0-4f43-87e8-09693d2e20dc',
+                                             'external_id': 2,
+                                             'name': 'Nikolay',
+                                             'type': 'driver'},
+    'adb1b4d1-f793-4020-a274-9bca31d762cf': {'uuid': 'adb1b4d1-f793-4020-a274-9bca31d762cf',
+                                             'external_id': 3,
+                                             'name': 'Elisey',
+                                             'type': 'driver'},
+    '19be733e-e54d-480b-8e7c-bc0336dc94d4': {'uuid': '19be733e-e54d-480b-8e7c-bc0336dc94d4',
+                                             'external_id': 4,
+                                             'name': 'Jayson',
+                                             'type': 'driver'},
+    'dbcf4a87-8c52-4046-b535-2ca2ca2685b5': {'uuid': 'dbcf4a87-8c52-4046-b535-2ca2ca2685b5',
+                                             'external_id': 5,
+                                             'name': 'Semyon',
+                                             'type': 'operator'},
+}
 
-let clients = [{
-    uuid: getGUID(),
-    name: "Engineer 1",
-    response: null
-}, {
-    uuid: getGUID(),
-    name: "Engineer 2",
-    response: null
-}, {
-    uuid: getGUID(),
-    name: "Engineer 3",
-    response: null
-}];
+let vehicles = {
+    1: {'id': 1, 'type': 'vehicle_1'},
+    2: {'id': 2, 'type': 'vehicle_2'},
+    3: {'id': 3, 'type': 'vehicle_3'},
+    4: {'id': 4, 'type': 'vehicle_4'},
+    5: {'id': 5, 'type': 'vehicle_5'},
+}
 
-let vehicles = [{
-    id: 1,
-    name: "Vehicle 1"
-}, {
-    id: 2,
-    name: "Vehicle 2"
-}, {
-    id: 3,
-    name: "Vehicle 3"
-}]
-
-let messages = [];
-for(let i = 0; i < 100; i++)
-{
-    let date = new Date();
-    date.setHours(0, 0, 0, 0);
-
-    messages.push({
-        uuid: getGUID(),
-        text: text[random(0, text.length - 1)],
-        date: date.getTime() + random(0, 1000000),
-        destination: vehicles[random(0, vehicles.length - 1)],
-        creator: clients[random(0, clients.length - 1)],
-        state: "viewed"
-    })
+let messages = {
+    'c3996b43-6c05-4bc7-b58f-705713cb45a9': {'uuid': 'c3996b43-6c05-4bc7-b58f-705713cb45a9',
+                                             'type': 'text',
+                                             'text': 'Hello, world!',
+                                             'destination': {'id': 1, 'type': 'vehicle_1'},
+                                             'creator': {'uuid': '2e22b683-340d-4d91-917f-c6759b08ef17',
+                                                         'external_id': 1,
+                                                         'name': 'Vasiliy',
+                                                         'type': 'driver'},
+                                             'send_time': 1645154887000,
+                                             'delivery_time': 1645154887000,
+                                             'confirm_time': 1645155007000,
+                                             'status': 'send'},
+    '1619da01-cffc-4426-a3d5-3974a63da769': {'uuid': '1619da01-cffc-4426-a3d5-3974a63da769',
+                                             'type': 'text',
+                                             'text': 'Привет, мир!',
+                                             'destination': {'id': 2, 'type': 'vehicle_2'},
+                                             'creator': {'uuid': 'a1053f60-9ed0-4f43-87e8-09693d2e20dc',
+                                                         'external_id': 2,
+                                                         'name': 'Nikolay',
+                                                         'type': 'driver'},
+                                             'send_time': 1644885007000,
+                                             'delivery_time': 1644885067000,
+                                             'confirm_time': 1644885127000,
+                                             'status': 'delivered'},
+    'b1db43c1-69c6-48a0-b47a-ba574966beeb': {'uuid': 'b1db43c1-69c6-48a0-b47a-ba574966beeb',
+                                             'type': 'text',
+                                             'text': 'Съешь ещё этих мягких французских булок, да выпей чаю',
+                                             'destination': {'id': 3, 'type': 'vehicle_3'},
+                                             'creator': {'uuid': '19be733e-e54d-480b-8e7c-bc0336dc94d4',
+                                                         'external_id': 4,
+                                                         'name': 'Jayson',
+                                                         'type': 'driver'},
+                                             'send_time': 1645154887000,
+                                             'delivery_time': 1645154887000,
+                                             'confirm_time': 1645155007000,
+                                             'status': 'confirmed'},
+    'dfdfb22f-9496-47c8-9cec-bcdc17e760c6': {'uuid': 'dfdfb22f-9496-47c8-9cec-bcdc17e760c6',
+                                             'type': 'text',
+                                             'text': 'Sample text',
+                                             'destination': {'id': 1, 'type': 'vehicle_1'},
+                                             'creator': {'uuid': '2e22b683-340d-4d91-917f-c6759b08ef17',
+                                                         'external_id': 1,
+                                                         'name': 'Vasiliy',
+                                                         'type': 'driver'},
+                                             'send_time': 1645154887000,
+                                             'delivery_time': 1645154887000,
+                                             'confirm_time': 1645155007000,
+                                             'status': 'send'},
+    '1559a0e5-bc45-4acf-8734-ba723b89ad30': {'uuid': '1559a0e5-bc45-4acf-8734-ba723b89ad30',
+                                             'type': 'text',
+                                             'text': 'Never give up',
+                                             'destination': {'id': 2, 'type': 'vehicle_2'},
+                                             'creator': {'uuid': 'dbcf4a87-8c52-4046-b535-2ca2ca2685b5',
+                                                         'external_id': 5,
+                                                         'name': 'Semyon',
+                                                         'type': 'operator'},
+                                             'send_time': 1644489127000,
+                                             'delivery_time': 1644489367000,
+                                             'confirm_time': 1644489607000,
+                                             'status': 'confirmed'}
 }
 
 app.listen(PORT, () => {
-  console.log(`Events service listening at http://192.168.0.196:${PORT}`)
+  console.log(`Events service listening at ${PORT}`)
 })
 
 let activeClients = [];
 function eventsHandler(request, response, next) {
     response.writeHead(200, headers);
 
-    let uuid = request.query.user_uuid;
-    let i = 0;
-    for(; i < clients.length; i++)
-        if(clients[i].uuid === uuid) break;
+    let id = request.query.external_id;
+    let { uuid } = getCreator(Number(id));
 
     activeClients.push({
-        uuid: clients[i].uuid,
+        uuid: uuid,
         response
     });
-    console.log(`${ clients[i].uuid } Connection open`);
+
+    console.log(`${ uuid } Connection open`);
 
     request.on('close', () => {
         console.log(`${ uuid } Connection closed`);
         activeClients = activeClients.filter(client => client.uuid !== uuid);
     });
+
+    response.write(`data: ${ JSON.stringify({ uuid: uuid }) }\n\n`)
 }
 
-app.get('/events', eventsHandler);
+app.get('/stream/', eventsHandler);
 
 function sendEventsToAll(message) {
-    console.log(activeClients.map(client => client.uuid).join("\n"))
-    activeClients.forEach(client => client.response.write(`data: ${ JSON.stringify(message) }\n\n`))
+    console.log("sendEventsToAll", activeClients.map(client => client.uuid).join("\n"))
+    activeClients.forEach(client => client.response.write(`data: ${ JSON.stringify({ messages: [message] }) }\n\n`))
 }
 
-async function addMessage(request, respsonse, next) {
+async function addMessage(request, response, next) {
     const message = request.body;
     message.uuid = getGUID();
     message.date = new Date().getTime();
     message.state = "delivered";
-    messages.push(message);
-    respsonse.json(message)
+    message.creator = getCreator(Number(request.query.external_id));
+    messages[message.uuid] = message;
+    response.json(message)
     return sendEventsToAll(message);
 }
 
-app.post('/message', addMessage);
-app.get('/user_info', (request, response) => response.json({ user: clients[random(0, clients.length - 1)] }));
-app.get('/messages', (request, response) => response.json({ messages: messages }));
+app.get('/messages/', (request, response) => {
+    let destination_id = request.query.destination_id;
+    let out = [];
+    for(let key in messages)
+        if(Number(messages[key].destination.id) == destination_id)
+            out.push(messages[key])
+    response.json({ messages: out })
+});
+app.post('/messages/', addMessage);
+app.post('/messages/*/set_status/', (request, response) => {
+    let uuid = request.params[0];
+    let message = messages[uuid];
+    message.state = request.body.state;
+    response.json(message);
+    return sendEventsToAll(message);
+});
 
+function getCreator(id)
+{
+    for(let key in clients)
+        if(clients[key].external_id === id)
+            return clients[key];
+}
 // Получить сообщения
 // Отправить сообщение
 // Получить статус сообщения
